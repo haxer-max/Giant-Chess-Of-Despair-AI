@@ -59,7 +59,7 @@ const wking= (i,j,piece,wall,green)=>{
             green.push(15*(i-1)+j-1);
         }
     }
-    if(1+i<10 && 1+j>-1){//,/
+    if(1+i<10 && -1+j>-1){//,/
         if((piece[i+1][j-1]>0/*&&piece[i+1][j-1]<5*/) || piece[i+1-1][j-1+1]<0||
             (wall[i+1][j-1]===1||wall[i+1-1][j-1]===3)&& (wall[i+1][j-1+1]===1||wall[i+1-1][j-1+1]===3) ||
             (wall[i+1][j-1]===1||wall[i+1-1][j-1]===3)&& (wall[i+1][j-1]===4||wall[i+1][j-1+1]===2) ||
@@ -72,7 +72,7 @@ const wking= (i,j,piece,wall,green)=>{
             green.push(15*(i+1)+j-1);
         }
     }
-    if(-1+i>-1 && -1+j<15){///'
+    if(-1+i>-1 && 1+j<15){///'
         if((piece[i-1][j+1]>0/*&&piece[i-1][j+1]<5*/) || piece[i-1+1][j+1-1]<0 ||
             (wall[i-1][j+1]===3||wall[i-1+1][j+1]===1)&& (wall[i-1][j+1-1]===3||wall[i-1+1][j+1-1]===1) ||
             (wall[i-1][j+1]===3||wall[i-1+1][j+1]===1)&& (wall[i-1][j+1]===2||wall[i-1][j+1-1]===4) ||
@@ -147,7 +147,7 @@ const bking= (i,j,piece,wall,green)=>{
             green.push(15*(i-1)+j-1);
         }
     }
-    if(1+i<10 && 1+j>-1){//,/
+    if(1+i<10 && -1+j>-1){//,/
         if((piece[i+1-1][j-1+1]>0/*&&piece[i+1-1][j-1+1]<5*/) || piece[i+1][j-1]<0||
             (wall[i+1][j-1]===1||wall[i+1-1][j-1]===3)&& (wall[i+1][j-1+1]===1||wall[i+1-1][j-1+1]===3) ||
             (wall[i+1][j-1]===1||wall[i+1-1][j-1]===3)&& (wall[i+1][j-1]===4||wall[i+1][j-1+1]===2) ||

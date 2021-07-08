@@ -15,7 +15,6 @@ import greenlogic from "./Board/greenlogic";
 import "./../../css/App.css";
 import AIplay from "./AI/AIplay";
 
-
 const sizex = 15;
 const sizey = 10;
 
@@ -24,16 +23,16 @@ class Game extends React.Component {
         super(props);
         this.state = {
             BoardState: [
-                [3, 0, 0, 0, 1, 5, 0, 0, 0,-5,-1, 0, 0,-5,-4],
+                [3, 0, 0, 0, 1, 5, 0, 0, 0, -5, -1, 0, 0, -5, -4],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,-3],
+                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,-2],
-                [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,-2],
+                [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2],
+                [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,-1],
+                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [4, 5, 0, 0, 1, 5, 0, 0, 0,-5,-1, 0, 0, 0,-3],
+                [4, 5, 0, 0, 1, 5, 0, 0, 0, -5, -1, 0, 0, 0, -3],
             ],
             walls: [
                 [2, 3, 1, 4, 0, 4, 3, 3, 0, 1, 0, 3, 4, 0, 3],
@@ -47,9 +46,8 @@ class Game extends React.Component {
                 [3, 0, 0, 4, 3, 4, 0, 3, 3, 0, 0, 4, 0, 3, 0],
                 [0, 4, 0, 1, 0, 3, 0, 0, 4, 0, 4, 0, 3, 0, 4],
             ],
-            valids:[],
+            valids: [],
             turn: 1,
-            joined: 0,
             rot: 2,
             ended: 0,
         };
@@ -58,10 +56,10 @@ class Game extends React.Component {
         this.selectedboxJ = -1;
         this.selectedPiece = 0;
         this.counter = 0;
-        this.isWhite=undefined;
+        this.isWhite = undefined;
         this.score1 = 0;
         this.score2 = 0;
-        this.AIplay=AIplay;
+        this.AIplay = AIplay;
 
         this.movepiece = (i, j) => {
             if (this.state.ended === 1) return;
@@ -80,7 +78,7 @@ class Game extends React.Component {
                                 this.state.BoardState[i][j] < 0)
                         ) {
                             this.selectedPiece = this.state.BoardState[i][j];
-                            const validtemp=[];
+                            const validtemp = [];
                             greenlogic(
                                 i,
                                 j,
@@ -89,47 +87,48 @@ class Game extends React.Component {
                                 validtemp
                             );
                             this.setState({
-                                valids:validtemp
-                            })
-                            console.log(this.state.valids)
+                                valids: validtemp,
+                            });
+                            console.log(this.state.valids);
                         }
                     }
                 }
             } else {
-                if (this.state.valids.includes(i*15+j)) {
+                if (this.state.valids.includes(i * 15 + j)) {
                     if (
-                        (this.isWhite === 1 && this.state.BoardState[i][j] === -4) ||
-                        (this.isWhite === 0 && this.state.BoardState[i][j] === 4)
+                        (this.isWhite === 1 &&
+                            this.state.BoardState[i][j] === -4) ||
+                        (this.isWhite === 0 &&
+                            this.state.BoardState[i][j] === 4)
                     ) {
-                        this.state.ended=1;
+                        this.state.ended = 1;
                         console.log("winwin");
                     }
                     this.state.BoardState[i][j] = this.selectedPiece;
-                    this.state.BoardState[this.selectedboxI][this.selectedboxJ] = 0;
+                    this.state.BoardState[this.selectedboxI][
+                        this.selectedboxJ
+                    ] = 0;
                     this.setState({
-                        valids:[]
+                        valids: [],
                     });
-                    if(!this.state.ended){
-                        const isBlack=this.isWhite? 0:1;
+                    if (!this.state.ended) {
+                        const isBlack = this.isWhite ? 0 : 1;
                         this.AIplay(this.state.BoardState,this.state.walls,this.state.rot,isBlack);
-                        this.turn=this.isWhite;
-                        console.log(this.state.BoardState)
+                        this.turn = this.isWhite;
+                        console.log(this.state.BoardState);
                     }
-                }
-                else{
+                } else {
                     this.setState({
-                        valids:[]
+                        valids: [],
                     });
                 }
                 this.score1 = whitescore(this.state.BoardState);
                 this.score2 = blackscore(this.state.BoardState);
 
                 this.selectedPiece = 0;
-
-                
             }
         };
-    };
+    }
 
     rotate(i, j) {
         if (this.state.ended === 1) return;
@@ -137,24 +136,22 @@ class Game extends React.Component {
         wallRotation(this.state.walls, i, j, this.isWhite);
         pieceRotation(this.state.BoardState, i, j, this.isWhite);
         this.setState({
-            rot:0
+            rot: 0,
         });
     }
 
     componentDidMount() {
         //console.log("hm " + this.props.location.state.roomid);
-        this.isWhite=1;
-        
-        if(this.isWhite!==this.state.turn){
-            //console.log(this.isWhite)
-            //console.log(this.turn)
-            console.log("noooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
-            const isBlack=this.isWhite? 0:1;
+        this.isWhite = 1;
+        this.setState({
+            valids: [],
+        });
+        if (this.isWhite !== this.state.turn) {
+            const isBlack = this.isWhite ? 0 : 1;
             this.AIplay(this.state.BoardState,this.state.walls,this.state.rot,isBlack);
-            this.turn=this.isWhite;
-        }        
+            this.turn = this.isWhite;
+        }
     }
-
 
     renbox(i, j) {
         return (
@@ -166,7 +163,7 @@ class Game extends React.Component {
                 onClick={() => {
                     this.movepiece(i, j);
                 }}
-                isgreen={this.state.valids.includes(15*i+j)}
+                isgreen={this.state.valids.includes(15 * i + j)}
             />
         );
     }
@@ -183,7 +180,10 @@ class Game extends React.Component {
             <div className="main">
                 <div className="navbar">
                     <p className="roomid">
-                        Your Room ID is <span className="code">{this.props.location.state.roomid}</span>
+                        Your Room ID is{" "}
+                        <span className="code">
+                            {this.props.location.state.roomid}
+                        </span>
                     </p>
                     <h2 className="chess">Giant Chess of Despair</h2>
                     <nav>
@@ -201,91 +201,55 @@ class Game extends React.Component {
                 <div className="boardclass">
                     <div style={{ display: "flex" }}>
                         <button
-                            className="btn btn-info"
-                            style={{    cursor:"pointer",
-                                marginLeft:"115px",
-                                marginRight:"110px",
-                                marginBottom: "5px",
-                                marginTop: "5px"}}
+                            className="rot"
                             onClick={() => {
                                 this.rotate(0, 0);
                             }}
                         >
-                            {" "}
-                            Rotate{" "}
+                            Rotate
                         </button>
                         <button
-                            className="btn btn-info"
-                            style={{    cursor:"pointer",
-                                marginLeft:"115px",
-                                marginRight:"110px",
-                                marginBottom: "5px",
-                                marginTop: "5px"}}
+                            className="rot"
                             onClick={() => {
                                 this.rotate(0, 5);
                             }}
                         >
-                            {" "}
-                            Rotate{" "}
+                            Rotate
                         </button>
                         <button
-                            className="btn btn-info"
-                            style={{    cursor:"pointer",
-                                marginLeft:"115px",
-                                marginRight:"110px",
-                                marginBottom: "5px",
-                                marginTop: "5px"}}
+                            className="rot"
                             onClick={() => {
                                 this.rotate(0, 10);
                             }}
                         >
-                            {" "}
-                            Rotate{" "}
+                            Rotate
                         </button>
                     </div>
                     <div>{ll}</div>
                     <div style={{ display: "flex" }}>
                         <button
-                            className="btn btn-info"
-                            style={{    cursor:"pointer",
-                                marginLeft:"115px",
-                                marginRight:"110px", 
-                                marginBottom: "5px",
-                                marginTop: "5px"}}
+                            className="rot"
                             onClick={() => {
                                 this.rotate(5, 0);
                             }}
                         >
-                            {" "}
-                            Rotate{" "}
+                            Rotate
                         </button>
                         <button
-                            className="btn btn-info"
-                            style={{    cursor:"pointer",
-                                marginLeft:"115px",
-                                marginRight:"110px", 
-                                marginBottom: "5px",
-                                marginTop: "5px"}}
+                            className="rot"
                             onClick={() => {
                                 this.rotate(5, 5);
                             }}
                         >
-                            {" "}
-                            Rotate{" "}
+                            Rotate
                         </button>
                         <button
-                            className="btn btn-info"
-                            style={{    cursor:"pointer",
-                                marginLeft:"115px",
-                                marginRight:"110px", 
-                                marginBottom: "5px",
-                                marginTop: "5px"}}
+                            className="rot"
                             onClick={() => {
                                 this.rotate(5, 10);
                             }}
                         >
-                            {" "}
-                            Rotate{" "}
+                            Rotate
                         </button>
                     </div>
                 </div>
@@ -294,16 +258,13 @@ class Game extends React.Component {
                     {(() => {
                         if (this.state.ended === 0) {
                             return (
-                                <button
-                                    className="btn btn-danger"
-                                >
+                                <button className="stop">
                                     I wanna give up
                                 </button>
                             );
                         }
                     })()}
                 </div>
-
             </div>
         );
     }

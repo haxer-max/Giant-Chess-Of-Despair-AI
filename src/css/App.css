@@ -96,11 +96,24 @@
     font-size: 20px;
 }
 .stop{
-    cursor: pointer;
-    color: white;
-    background-color: red;
-    font-size: 20px;
+    cursor:pointer;
+    margin-left:110px;
+    margin-right:110px;
+    margin-bottom:5px;
+    margin-top:5px;
+    width:80px;
+    height:35px;
+    border-radius: 5px;
+    background-color: #cc0a0a ;
+    border: 0px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
 }
+.stop:hover{
+    background-color: #9c0404 ;
+}
+
 .timeallocate{
     font-weight: bold;
     border-color: black;
@@ -162,10 +175,20 @@
 }
 
 .rot{    
-    cursor:"pointer";
-    margin-left:"126px" !important;
-    margin-right:"120px" !important;
-    margin-bottom: "5px" !important;
-    margin-top: "5px";
-    background-color: #99FF00 ;
+    cursor:pointer;
+    margin-left:110px;
+    margin-right:110px;
+    margin-bottom:5px;
+    margin-top:5px;
+    width:80px;
+    height:35px;
+    border-radius: 5px;
+    background-color: #06a4af ;
+    border: 0px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+}
+.rot:hover{
+    background-color: #025f66 ;
 }
