@@ -4,8 +4,6 @@ import {wbishop, bbishop} from './PieceLogic/bishop';
 import {wking, bking} from './PieceLogic/king';
 
 export default function greenlogic(i,j,piece,wall,green){
-    console.log("greeeeeeeeeeeeen")
-    console.log(piece[i][j])
     switch(piece[i][j]){
         case 1: wknight(i,j,piece,wall,green); break;
         case 2: wbishop(i,j,piece,wall,green); break;

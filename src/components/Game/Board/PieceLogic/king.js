@@ -5,7 +5,7 @@ const wking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[ii][j]=1;
+            green.push(15*ii+j);
         }
     }
      ii=i-1;
@@ -14,7 +14,7 @@ const wking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[ii][j]=1;
+            green.push(15*ii+j);
         }
     }
      ii=j+1;
@@ -23,7 +23,7 @@ const wking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[i][ii]=1;
+            green.push(15*i+ii);
         }
     }
      ii=j-1;
@@ -32,7 +32,7 @@ const wking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[i][ii]=1;
+            green.push(15*i+ii);
         }
     }
     if(1+i<10 && 1+j<15){//\,
@@ -43,7 +43,7 @@ const wking= (i,j,piece,wall,green)=>{
             (wall[i+1][j+1]===2||wall[i+1][j+1-1]===4)&& (wall[i+1-1][j+1]===2||wall[i+1-1][j+1-1]===4) 
         ){}
         else{
-            green[i+1][j+1]=1;
+            green.push(15*(i+1)+j+1);
         }
     }
     if(-1+i>-1 && -1+j>-1 ){//'\
@@ -56,7 +56,7 @@ const wking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[i-1][j-1]=1;
+            green.push(15*(i-1)+j-1);
         }
     }
     if(1+i<10 && 1+j>-1){//,/
@@ -69,7 +69,7 @@ const wking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[i+1][j-1]=1;
+            green.push(15*(i+1)+j-1);
         }
     }
     if(-1+i>-1 && -1+j<15){///'
@@ -82,7 +82,7 @@ const wking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[i-1][j+1]=1;
+            green.push(15*(i-1)+j+1);
         }
     }
 }
@@ -93,7 +93,7 @@ const bking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[ii][j]=1;
+            green.push(15*ii+j);
         }
     }
      ii=i-1;
@@ -102,7 +102,7 @@ const bking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[ii][j]=1;
+            green.push(15*ii+j);
         }
     }
      ii=j+1;
@@ -111,7 +111,7 @@ const bking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[i][ii]=1;
+            green.push(15*i+ii);
         }
     }
      ii=j-1;
@@ -120,7 +120,7 @@ const bking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[i][ii]=1;
+            green.push(15*i+ii);
         }
     }
     if(1+i<10 && 1+j<15){//\,
@@ -131,7 +131,7 @@ const bking= (i,j,piece,wall,green)=>{
             (wall[i+1][j+1]===2||wall[i+1][j+1-1]===4)&& (wall[i+1-1][j+1]===2||wall[i+1-1][j+1-1]===4) 
         ){}
         else{
-            green[i+1][j+1]=1;
+            green.push(15*(i+1)+j+1);
         }
     }
     if(-1+i>-1 && -1+j>-1 ){//'\
@@ -144,7 +144,7 @@ const bking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[i-1][j-1]=1;
+            green.push(15*(i-1)+j-1);
         }
     }
     if(1+i<10 && 1+j>-1){//,/
@@ -157,7 +157,7 @@ const bking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[i+1][j-1]=1;
+            green.push(15*(i+1)+j-1);
         }
     }
     if(-1+i>-1 && -1+j<15){///'
@@ -170,7 +170,7 @@ const bking= (i,j,piece,wall,green)=>{
             
         }
         else{
-            green[i-1][j+1]=1;
+            green.push(15*(i-1)+j+1);
         }
     }
 }

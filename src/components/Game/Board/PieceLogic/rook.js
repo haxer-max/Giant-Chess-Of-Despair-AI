@@ -4,7 +4,7 @@ const wrook= (i,j,piece,wall,green)=>{
             break;
         }
         else{
-            green[ii][j]=1;
+            green.push(15*ii+j);
         }
     }
     for(let ii=i-1; ii>-1;ii--){
@@ -12,7 +12,7 @@ const wrook= (i,j,piece,wall,green)=>{
             break;
         }
         else{
-            green[ii][j]=1;
+            green.push(15*ii+j);
         }
     }
     for(let ii=j+1; ii<15;ii++){
@@ -20,7 +20,7 @@ const wrook= (i,j,piece,wall,green)=>{
             break;
         }
         else{
-            green[i][ii]=1;
+            green.push(15*i+ii);
         }
     }
     for(let ii=j-1; ii>-1;ii--){
@@ -28,7 +28,7 @@ const wrook= (i,j,piece,wall,green)=>{
             break;
         }
         else{
-            green[i][ii]=1;
+            green.push(15*i+ii);
         }
     }
 }
@@ -38,7 +38,7 @@ const brook= (i,j,piece,wall,green)=>{
             break;
         }
         else{
-            green[ii][j]=1;
+            green.push(15*ii+j);
         }
     }
     for(let ii=i-1; ii>-1;ii--){
@@ -46,7 +46,7 @@ const brook= (i,j,piece,wall,green)=>{
             break;
         }
         else{
-            green[ii][j]=1;
+            green.push(15*ii+j);
         }
     }
     for(let ii=j+1; ii<15;ii++){
@@ -54,7 +54,7 @@ const brook= (i,j,piece,wall,green)=>{
             break;
         }
         else{
-            green[i][ii]=1;
+            green.push(15*i+ii);
         }
     }
     for(let ii=j-1; ii>-1;ii--){
@@ -62,7 +62,7 @@ const brook= (i,j,piece,wall,green)=>{
             break;
         }
         else{
-            green[i][ii]=1;
+            green.push(15*i+ii);
         }
     }
 }

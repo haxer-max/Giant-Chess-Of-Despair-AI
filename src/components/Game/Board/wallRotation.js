@@ -1,4 +1,4 @@
-export default function wallRotation(boardtemp, i, j,c) {
+export default function wallRotation(board, u, v,c) {
     const temp = [
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
@@ -6,27 +6,38 @@ export default function wallRotation(boardtemp, i, j,c) {
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
     ];
+    let t,i,j;
+    const n=5;
     if(c){
-        for (let q = i; q < i + 5; q++) {
-            for (let w = j; w < j + 5; w++) {
-                if(boardtemp[q][w]>0) temp[w-j][4+i-q] = (boardtemp[q][w]+2)%4+1;
+        for(i=0; i<2; i++){
+            for(j=i; j<5-i-1; j++){
+                t                  = board[i+u][j+v];
+                board[i+u][j+v]        = board[n-j-1+u][i+v];
+                board[n-j-1+u][i+v]    = board[n-i-1+u][n-j-1+v];
+                board[n-i-1+u][n-j-1+v]= board[j+u][n-i-1+v];
+                board[j+u][n-i-1+v]    = t;
             }
         }
-        
+        for(i=u; i<u+5; i++) {
+            for(j=v; j<v+5; j++) {
+                if(board[i][j]>0) board[i][j]=(board[i][j]+2)%4+1;
+            }
+        }
     } else{
-        for (let q = i; q < i + 5; q++) {
-            for (let w = j; w < j + 5; w++) {
-                if(boardtemp[q][w]>0) temp[4+j-w][q-i] = (boardtemp[q][w])%4+1;
-
+        for(i=0; i<2; i++){
+            for(j=i;j<5-i-1;j++){
+                t                  = board[i+u][j+v];
+                board[i+u][j+v]    = board[j+u][n-i-1+v];
+                board[j+u][n-i-1+v]= board[n-i-1+u][n-j-1+v];
+                board[n-i-1+u][n-j-1+v]= board[n-j-1+u][i+v];
+                board[n-j-1+u][i+v] =t;
+            }
+        }
+        for(i=u; i<u+5; i++) {
+            for(j=v; j<v+5; j++) {
+                if(board[i][j]>0) board[i][j]=board[i][j]%4+1;
             }
         }
     }
-    console.log(temp);
-    for (let q = i; q < i + 5; q++) {
-        for (let w = j; w < j + 5; w++) {
-            boardtemp[q][w]=temp[q-i][w-j];
-        }
-    }
-    console.log(boardtemp)
-    return boardtemp;
+    return board;
 }

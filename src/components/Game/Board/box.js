@@ -63,7 +63,7 @@ export default function Box(props) {
                 onClick={props.onClick}
             >
                 {(() => {
-                        if (props.isgreen===1) {
+                        if (props.isgreen) {
                             return <div style={{position:"absolute",left:"15px",
                                 top:"15px",height:30, width:30,borderRadius:"100%", 
                                 backgroundColor:"rgba(102,51,153,0.5)"}}></div>;

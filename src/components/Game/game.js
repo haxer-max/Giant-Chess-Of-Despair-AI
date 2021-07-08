@@ -1,38 +1,24 @@
 import React, { Component } from "react";
 //import "./Game.css";
-import { Modal, Button, ModalBody } from "react-bootstrap";
-import Clock from "./timer";
+//import { Modal, Button, ModalBody } from "react-bootstrap";
 import "./ui.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 //import React from "react";
 import Box from "./Board/box.js";
-import io from "socket.io-client";
 import pieceRotation from "./Board/pieceRotation";
 import wallRotation from "./Board/wallRotation";
 import whitescore from "./Board/whitescore";
 import blackscore from "./Board/blackscore";
 import greenlogic from "./Board/greenlogic";
-import { AboutModal } from "./AboutModal";
-import { RulesModal } from "./RulesModal";
+//import { AboutModal } from "./AboutModal";
+//import { RulesModal } from "./RulesModal";
 import "./../../css/App.css";
-//import wallslogicc from "./Board/wallslogicc"
-//import { render } from "@testing-library/react";
+import AIplay from "./AI/AIplay";
 
-const serverURI = "http://localhost:4000";
+
 const sizex = 15;
 const sizey = 10;
-const initgreen = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-];
+
 class Game extends React.Component {
     constructor(props) {
         super(props);
@@ -61,40 +47,24 @@ class Game extends React.Component {
                 [3, 0, 0, 4, 3, 4, 0, 3, 3, 0, 0, 4, 0, 3, 0],
                 [0, 4, 0, 1, 0, 3, 0, 0, 4, 0, 4, 0, 3, 0, 4],
             ],
-            timeLeft: 60 * 20,
-            whiteTime: 60 * 20,
-            blackTime: 60 * 20,
-            gamestarted: 0,
-            turn: -1,
+            valids:[],
+            turn: 1,
             joined: 0,
-            rot: -1,
+            rot: 2,
             ended: 0,
-            green: [
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ],
         };
 
         this.selectedboxI = -1;
         this.selectedboxJ = -1;
         this.selectedPiece = 0;
         this.counter = 0;
-        //this.isWhite=undefined;
-        this.socket = io(serverURI);
+        this.isWhite=undefined;
         this.score1 = 0;
         this.score2 = 0;
+        this.AIplay=AIplay;
 
         this.movepiece = (i, j) => {
             if (this.state.ended === 1) return;
-            if (this.state.gamestarted === 0) return;
             this.score1 = whitescore(this.state.BoardState);
             this.score2 = blackscore(this.state.BoardState);
             if (this.state.turn == !this.isWhite) return;
@@ -110,57 +80,79 @@ class Game extends React.Component {
                                 this.state.BoardState[i][j] < 0)
                         ) {
                             this.selectedPiece = this.state.BoardState[i][j];
-                            valids=[];
+                            const validtemp=[];
                             greenlogic(
                                 i,
                                 j,
                                 this.state.BoardState,
                                 this.state.walls,
-                                valids
+                                validtemp
                             );
+                            this.setState({
+                                valids:validtemp
+                            })
+                            console.log(this.state.valids)
                         }
                     }
                 }
             } else {
-                if (this.state.green[i][j] === 1) {
+                if (this.state.valids.includes(i*15+j)) {
                     if (
                         (this.isWhite === 1 && this.state.BoardState[i][j] === -4) ||
                         (this.isWhite === 0 && this.state.BoardState[i][j] === 4)
                     ) {
+                        this.state.ended=1;
                         console.log("winwin");
                     }
                     this.state.BoardState[i][j] = this.selectedPiece;
                     this.state.BoardState[this.selectedboxI][this.selectedboxJ] = 0;
+                    this.setState({
+                        valids:[]
+                    });
+                    if(!this.state.ended){
+                        const isBlack=this.isWhite? 0:1;
+                        this.AIplay(this.state.BoardState,this.state.walls,this.state.rot,isBlack);
+                        this.turn=this.isWhite;
+                        console.log(this.state.BoardState)
+                    }
                 }
-
+                else{
+                    this.setState({
+                        valids:[]
+                    });
+                }
                 this.score1 = whitescore(this.state.BoardState);
                 this.score2 = blackscore(this.state.BoardState);
 
                 this.selectedPiece = 0;
+
+                
             }
         };
-    }
+    };
+
     rotate(i, j) {
         if (this.state.ended === 1) return;
-        if (this.state.gamestarted === 0) return;
         if (this.state.turn == !this.isWhite) return;
-        const boardtemp = this.state.BoardState.map(function (arr) {
-            return arr.slice();
+        wallRotation(this.state.walls, i, j, this.isWhite);
+        pieceRotation(this.state.BoardState, i, j, this.isWhite);
+        this.setState({
+            rot:0
         });
-        const wallstemp = this.state.walls.map(function (arr) {
-            return arr.slice();
-        });
-        wallRotation(wallstemp, i, j, this.isWhite);
-        pieceRotation(boardtemp, i, j, this.isWhite);
-        this.socket.emit("rotated", { board: boardtemp, wall: wallstemp });
     }
 
     componentDidMount() {
-        console.log("hm " + this.props.location.state.roomid);
-        this.join(
-            this.props.location.state.roomid,
-            this.props.location.state.name
-        );        
+        //console.log("hm " + this.props.location.state.roomid);
+        this.isWhite=1;
+        
+        if(this.isWhite!==this.state.turn){
+            //console.log(this.isWhite)
+            //console.log(this.turn)
+            console.log("noooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
+            const isBlack=this.isWhite? 0:1;
+            this.AIplay(this.state.BoardState,this.state.walls,this.state.rot,isBlack);
+            this.turn=this.isWhite;
+        }        
     }
 
 
@@ -174,7 +166,7 @@ class Game extends React.Component {
                 onClick={() => {
                     this.movepiece(i, j);
                 }}
-                isgreen={this.state.green[i][j]}
+                isgreen={this.state.valids.includes(15*i+j)}
             />
         );
     }
@@ -195,8 +187,8 @@ class Game extends React.Component {
                     </p>
                     <h2 className="chess">Giant Chess of Despair</h2>
                     <nav>
-                        <AboutModal />
-                        <RulesModal />
+                        {/* <AboutModal />
+                        <RulesModal /> */}
                     </nav>
                     {(() => {
                         if (this.isWhite !== undefined) {
