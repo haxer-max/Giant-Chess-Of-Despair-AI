@@ -89,7 +89,7 @@ class Game extends React.Component {
                             this.setState({
                                 valids: validtemp,
                             });
-                            console.log(this.state.valids);
+                            //console.log(this.state.valids);
                         }
                     }
                 }
@@ -115,7 +115,8 @@ class Game extends React.Component {
                         const isBlack = this.isWhite ? 0 : 1;
                         this.AIplay(this.state.BoardState,this.state.walls,this.state.rot,isBlack);
                         this.turn = this.isWhite;
-                        console.log(this.state.BoardState);
+                        this.setState({});
+                        //console.log(this.state.BoardState);
                     }
                 } else {
                     this.setState({
@@ -150,6 +151,7 @@ class Game extends React.Component {
             const isBlack = this.isWhite ? 0 : 1;
             this.AIplay(this.state.BoardState,this.state.walls,this.state.rot,isBlack);
             this.turn = this.isWhite;
+            this.setState({});
         }
     }
 
