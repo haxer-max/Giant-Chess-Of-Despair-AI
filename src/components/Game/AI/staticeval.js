@@ -1,9 +1,9 @@
 const valmap={
-    1:3,
-    2:3.2,
-    3:3.1,
-    4:50,
-    5:2.2
+    1:30,
+    2:32,
+    3:31,
+    4:500,
+    5:22
 }
 export default function staticEvaluation(pieces,board){
     var i,score=0;

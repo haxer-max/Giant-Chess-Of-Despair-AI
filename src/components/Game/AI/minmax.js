@@ -25,7 +25,6 @@ function MinMax(state, depth, iswhite, alpha, beta){
             if(val>bestval){
                 bestval=val;
                 bestMove=moveset[i];
-                //console.log(bestval, bestMove);
                 alpha=Math.max(alpha,val);
                 if(beta<=alpha){
                     undomove(state,moveset[i],stp,endp,iswhite);
@@ -41,18 +40,15 @@ function MinMax(state, depth, iswhite, alpha, beta){
         for(let i=0; i<moveset.length; i++){
             const {stp,endp,out}=play(state,moveset[i],iswhite);
             let val;
-            console.log("out",out);
             if(out===0){    
                 [val, _]=MinMax(state, depth-1, 1, alpha, beta);
             }
             else{
                 val=out*100000;
             }
-            console.log(state.board,val);
             if(val<bestval){
                 bestval=val;
                 bestMove=moveset[i];
-                //console.log(bestval, bestMove);
                 beta=Math.min(beta,val);
                 if(beta<=alpha){
                     undomove(state,moveset[i],stp,endp,iswhite);
@@ -61,7 +57,6 @@ function MinMax(state, depth, iswhite, alpha, beta){
             }
             undomove(state,moveset[i],stp,endp,iswhite);
         }
-        //console.log(bestval, bestMove);
         return [bestval,bestMove];
     }
 }

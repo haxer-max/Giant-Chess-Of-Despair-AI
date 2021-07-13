@@ -43,6 +43,7 @@ const undomove=(state,move,stp,endp,iswhite)=>{
     state.board[~~(st/15)][st%15]=stp;
     state.board[~~(end/15)][end%15]=endp;
     state.pieces[iswhite].set(st,stp);
+    state.pieces[iswhite].delete(end);
     if(endp!==0){
         state.pieces[iswhite^1].set(end,endp);
     }

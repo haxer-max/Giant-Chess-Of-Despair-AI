@@ -63,6 +63,7 @@ class Game extends React.Component {
 
         this.movepiece = (i, j) => {
             if (this.state.ended === 1) return;
+            if(this.state.turn ===0) return;
             this.score1 = whitescore(this.state.BoardState);
             this.score2 = blackscore(this.state.BoardState);
             if (this.state.turn == !this.isWhite) return;
@@ -105,9 +106,7 @@ class Game extends React.Component {
                         console.log("winwin");
                     }
                     this.state.BoardState[i][j] = this.selectedPiece;
-                    this.state.BoardState[this.selectedboxI][
-                        this.selectedboxJ
-                    ] = 0;
+                    this.state.BoardState[this.selectedboxI][this.selectedboxJ] = 0;
                     this.setState({
                         valids: [],
                     });

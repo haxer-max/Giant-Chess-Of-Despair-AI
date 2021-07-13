@@ -27,8 +27,9 @@ export default function AIplay(boardoff,walloff,rotoff,iswhite){
         walls:walls, 
         pieces: pieces
     }
+    //console.clear();
     console.log("iswhite",iswhite);
-    const [bestval, bestmove] = MinMax(state, 1, iswhite, -100000, 100000);
+    const [bestval, bestmove] = MinMax(state, 4, iswhite, -100000, 100000);
     console.log("bestmove",bestmove);
     if(bestmove>=0){
         boardoff[~~((bestmove%150)/15)][(bestmove%150)%15]=boardoff[~~(~~(bestmove/150)/15)][~~(bestmove/150)%15];
