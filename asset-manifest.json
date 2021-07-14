@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Giant-Chess-Of-Despair-AI/static/css/main.3f0d68a6.chunk.css",
+    "main.js": "/Giant-Chess-Of-Despair-AI/static/js/main.671de107.chunk.js",
+    "main.js.map": "/Giant-Chess-Of-Despair-AI/static/js/main.671de107.chunk.js.map",
+    "runtime-main.js": "/Giant-Chess-Of-Despair-AI/static/js/runtime-main.8d13da93.js",
+    "runtime-main.js.map": "/Giant-Chess-Of-Despair-AI/static/js/runtime-main.8d13da93.js.map",
+    "static/js/2.204bafb3.chunk.js": "/Giant-Chess-Of-Despair-AI/static/js/2.204bafb3.chunk.js",
+    "static/js/2.204bafb3.chunk.js.map": "/Giant-Chess-Of-Despair-AI/static/js/2.204bafb3.chunk.js.map",
+    "index.html": "/Giant-Chess-Of-Despair-AI/index.html",
+    "static/css/main.3f0d68a6.chunk.css.map": "/Giant-Chess-Of-Despair-AI/static/css/main.3f0d68a6.chunk.css.map",
+    "static/js/2.204bafb3.chunk.js.LICENSE.txt": "/Giant-Chess-Of-Despair-AI/static/js/2.204bafb3.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8d13da93.js",
+    "static/js/2.204bafb3.chunk.js",
+    "static/css/main.3f0d68a6.chunk.css",
+    "static/js/main.671de107.chunk.js"
+  ]
+}
