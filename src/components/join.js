@@ -9,13 +9,12 @@ export default function Join() {
             <div className="joinInnerContainer">
                 <img
                     className="image"
-                    src={require("./Game/images/pub.png")}
-                    alt="Technotholon"
+                    src={process.env.PUBLIC_URL+"./logo.png"}
                     width="200"
                     height="200"
                 ></img>
                 <h1 className="heading">Giant Chess Of Despair</h1>
-                <h2 className="subheading">AI</h2>
+                <h2 className="subheading">Artificial Intelligence</h2>
                 <hr></hr>
                 <div>
                     <Link

@@ -180,12 +180,6 @@ class Game extends React.Component {
         return (
             <div className="main">
                 <div className="navbar">
-                    <p className="roomid">
-                        Your Room ID is{" "}
-                        <span className="code">
-                            {this.props.location.state.roomid}
-                        </span>
-                    </p>
                     <h2 className="chess">Giant Chess of Despair</h2>
                     <nav>
                         {/* <AboutModal />
