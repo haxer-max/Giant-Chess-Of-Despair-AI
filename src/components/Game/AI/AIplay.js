@@ -28,8 +28,10 @@ export default function AIplay(boardoff,walloff,rotoff,iswhite){
         pieces: pieces
     }
     //console.clear();
-    console.log("iswhite",iswhite);
+    const tic=new Date().getTime();
     const [bestval, bestmove] = MinMax(state, 4, iswhite, -100000, 100000);
+    const toc=new Date().getTime();
+    console.log("Time Taken: ",toc-tic," ms");
     console.log("bestmove",bestmove);
     if(bestmove>=0){
         boardoff[~~((bestmove%150)/15)][(bestmove%150)%15]=boardoff[~~(~~(bestmove/150)/15)][~~(bestmove/150)%15];
