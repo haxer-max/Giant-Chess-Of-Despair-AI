@@ -9,7 +9,8 @@ export default function Join() {
             <div className="joinInnerContainer">
                 <img
                     className="image"
-                    src={process.env.PUBLIC_URL+"./logo.png"}
+                    src={process.env.PUBLIC_URL+"/logo.png"}
+                    alt="GCOD"
                     width="200"
                     height="200"
                 ></img>
