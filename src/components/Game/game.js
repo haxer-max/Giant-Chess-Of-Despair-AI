@@ -135,6 +135,8 @@ class Game extends React.Component {
         if (this.state.turn == !this.isWhite) return;
         wallRotation(this.state.walls, i, j, this.isWhite);
         pieceRotation(this.state.BoardState, i, j, this.isWhite);
+        this.AIplay(this.state.BoardState,this.state.walls,this.state.rot,0);
+        this.turn = this.isWhite;
         this.setState({
             rot: 0,
         });
